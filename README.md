@@ -11,7 +11,7 @@ This example uses 3 NGINX servers (nginx01/02/03) and 3 backend servers in 3 AZs
   * Populate `cert_path` to point to the directory holding your cert and key
 * If using AWS
   * Populate the CIDR you need to allow access from and security group IDs, if using AWS, otherwise set `aws` to `false`
-  * Make sure you have the aws cli installed, `pip install awscli` and configured with your credentials
+  * Make sure you have the aws cli installed, `pip install awscli`, and configured with your credentials
 * This generates TCP/UDP streams only, not HTTP, so you must have the following in your NGINX config somewhere:
   ```
   stream {
