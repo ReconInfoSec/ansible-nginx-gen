@@ -9,6 +9,7 @@
     fail_timeout: 10s
     max_fails: 3
     cert_path:
+    key_path:
     tcp: [ "5044" ]
     tcp_tls: [ "5045" ]
     udp: [ "6514" ]

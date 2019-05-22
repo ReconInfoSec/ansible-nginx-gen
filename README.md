@@ -37,7 +37,8 @@ Contents:
   vars:
     fail_timeout: 10s
     max_fails: 3
-    cert_path: /etc/letsencrypt/live/mydomain.com
+    cert_path: /etc/letsencrypt/live/mydomain.com/fullchain.pem
+    key_path: /etc/letsencrypt/live/mydomain.com/privkey.pem
     tcp: [ "5044" ]
     tcp_tls: [ "5045" ]
     udp: [ "6514" ]
