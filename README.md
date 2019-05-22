@@ -17,7 +17,15 @@ This example uses 3 NGINX servers (nginx01/02/03) and 3 backend servers in 3 AZs
   }
   ```
 
-### Example playbook, `main.yml`: 
+### Example playbook, `main.yml`:
+
+To run it:
+
+```
+ansible-playbook main.yml
+```
+
+Contents:
 ```
 ---
 
