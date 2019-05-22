@@ -1,0 +1,10 @@
+[nginx]
+nginx01 ansible_ssh_host=
+nginx02 ansible_ssh_host=
+nginx03 ansible_ssh_host=
+
+[nginx:vars]
+ansible_user=
+ansible_become=true
+ansible_ssh_port=
+ansible_ssh_private_key_file=

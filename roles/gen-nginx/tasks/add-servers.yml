@@ -1,0 +1,43 @@
+---
+
+- name: Add server lines to file
+  lineinfile:
+    insertafter: '^\s*least_conn'
+    regexp: '^\s*server {{ server.key }}'
+    firstmatch: yes
+    path: "/etc/nginx/streams/{{ item }}"
+    state: present
+    line: "    server {{ server.key }}:{{ item }} max_fails={{ max_fails }} fail_timeout={{ fail_timeout }} weight={{ server.value.weight }};"
+  with_dict:
+    - "{{ backend_servers_a }}"
+  when: "'01' in inventory_hostname"
+  loop_control:
+    loop_var: server
+
+- name: Add server lines to file
+  lineinfile:
+    insertafter: '^\s*least_conn'
+    regexp: '^\s*server {{ server.key }}'
+    firstmatch: yes
+    path: "/etc/nginx/streams/{{ item }}"
+    state: present
+    line: "    server {{ server.key }}:{{ item }} max_fails={{ max_fails }} fail_timeout={{ fail_timeout }} weight={{ server.value.weight }};"
+  with_dict:
+    - "{{ backend_servers_b }}"
+  when: "'02' in inventory_hostname"
+  loop_control:
+    loop_var: server
+
+- name: Add server lines to file
+  lineinfile:
+    insertafter: '^\s*least_conn'
+    regexp: '^\s*server {{ server.key }}'
+    firstmatch: yes
+    path: "/etc/nginx/streams/{{ item }}"
+    state: present
+    line: "    server {{ server.key }}:{{ item }} max_fails={{ max_fails }} fail_timeout={{ fail_timeout }} weight={{ server.value.weight }};"
+  with_dict:
+    - "{{ backend_servers_c }}"
+  when: "'03' in inventory_hostname"
+  loop_control:
+    loop_var: server

@@ -1,0 +1,13 @@
+upstream backend{{ item }} {
+    least_conn;
+
+}
+
+server {
+
+  listen {{ item }} udp;
+
+  proxy_pass backend{{ item }};
+  proxy_timeout 1s;
+  proxy_responses 0;
+}

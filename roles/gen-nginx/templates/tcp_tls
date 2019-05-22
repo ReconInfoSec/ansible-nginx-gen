@@ -1,0 +1,16 @@
+upstream backend{{ item }} {
+    least_conn;
+
+}
+
+server {
+
+  listen {{ item }} ssl; 
+  ssl_certificate {{ cert_path }}/cert.pem;
+  ssl_certificate_key {{ cert_path }}/privkey.pem;
+  ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
+  ssl_ciphers         HIGH:!aNULL:!MD5;
+
+  proxy_pass backend{{ item }};
+  proxy_ssl  on;
+}

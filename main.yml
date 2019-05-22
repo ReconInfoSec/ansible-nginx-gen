@@ -1,0 +1,41 @@
+---
+
+- name: Add new servers and ports to nginx stream configs
+  hosts:
+    - nginx01
+    - nginx02
+    - nginx03
+  vars:
+    fail_timeout: 10s
+    max_fails: 3
+    cert_path:
+    tcp: [ "5044" ]
+    tcp_tls: [ "5045" ]
+    udp: [ "6514" ]
+    backend_servers_a:
+      172.20.1.11:
+        weight: 5
+      172.20.2.12:
+        weight: 1
+      172.20.3.13:
+        weight: 1
+    backend_servers_b:
+      172.20.1.11:
+        weight: 1
+      172.20.2.12:
+        weight: 5
+      172.20.3.13:
+        weight: 1
+    backend_servers_c:
+      172.20.1.11:
+        weight: 1
+      172.20.2.12:
+        weight: 1
+      172.20.3.13:
+        weight: 5
+    aws: true
+    tcp_sg: "sg-xxxxxxxx"
+    udp_sg: "sg-xxxxxxxx"
+  roles:
+
+    - { role: gen-nginx }

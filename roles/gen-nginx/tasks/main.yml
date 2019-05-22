@@ -1,0 +1,50 @@
+---
+# tasks file for roles/gen-nginx
+
+- include_tasks: update-sec-groups.yml
+  when: aws
+
+- name: Create streams directory if it doesn't exist
+  file:
+    path: /etc/nginx/streams
+    state: directory
+
+- name: Generate nginx config
+  template:
+    src: templates/udp
+    dest: "/etc/nginx/streams/{{ item }}"
+  with_items:
+    - "{{ udp }}"
+
+- include_tasks: add-servers.yml
+  with_items: "{{ udp }}"
+
+- name: Generate nginx config
+  template:
+    src: templates/tcp_tls
+    dest: "/etc/nginx/streams/{{ item }}"
+  with_items:
+    - "{{ tcp_tls }}"
+
+- include_tasks: add-servers.yml
+  with_items: "{{ tcp_tls }}"
+
+- name: Generate nginx config
+  template:
+    src: templates/tcp
+    dest: "/etc/nginx/streams/{{ item }}"
+  with_items:
+    - "{{ tcp }}"
+
+- include_tasks: add-servers.yml
+  with_items: "{{ tcp }}"
+
+- name: Test nginx config
+  shell: nginx -t
+  register: result
+  changed_when: "result.rc != 0"
+
+- name: Reload nginx
+  service:
+    name: nginx
+    state: reloaded

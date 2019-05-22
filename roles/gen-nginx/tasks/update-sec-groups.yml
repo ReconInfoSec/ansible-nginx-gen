@@ -1,0 +1,19 @@
+---
+  
+- name: Update security group with TCP ports
+  command: "aws ec2 authorize-security-group-ingress --group-id {{ tcp_sg }} --ip-permissions '[{\"IpProtocol\": \"tcp\", \"FromPort\": {{ item }}, \"ToPort\": {{ item }}, \"IpRanges\": [{\"CidrIp\": \"0.0.0.0/0\", \"Description\": \"{{ item }}\"}]}]'"
+  with_items: "{{ tcp }}"
+  ignore_errors: True
+  delegate_to: localhost
+
+- name: Update security group with TCP TLS ports
+  command: "aws ec2 authorize-security-group-ingress --group-id {{ tcp_sg }} --ip-permissions '[{\"IpProtocol\": \"tcp\", \"FromPort\": {{ item }}, \"ToPort\": {{ item }}, \"IpRanges\": [{\"CidrIp\": \"0.0.0.0/0\", \"Description\": \"{{ item }}\"}]}]'"
+  with_items: "{{ tcp_tls }}"
+  ignore_errors: True
+  delegate_to: localhost
+
+- name: Update security group with UDP ports
+  command: "aws ec2 authorize-security-group-ingress --group-id {{ udp_sg }} --ip-permissions '[{\"IpProtocol\": \"udp\", \"FromPort\": {{ item }}, \"ToPort\": {{ item }}, \"IpRanges\": [{\"CidrIp\": \"0.0.0.0/0\", \"Description\": \"{{ item }}\"}]}]'"
+  with_items: "{{ udp }}"
+  ignore_errors: True
+  delegate_to: localhost

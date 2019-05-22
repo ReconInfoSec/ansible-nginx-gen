@@ -1,0 +1,11 @@
+upstream backend{{ item }} {
+    least_conn;
+
+}
+
+server {
+
+  listen {{ item }};
+
+  proxy_pass backend{{ item }};
+}
