@@ -35,6 +35,7 @@
       172.20.3.13:
         weight: 5
     aws: true
+    cidr: 0.0.0.0\0
     tcp_sg: "sg-xxxxxxxx"
     udp_sg: "sg-xxxxxxxx"
   roles:

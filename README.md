@@ -8,7 +8,7 @@ This example uses 3 NGINX servers (nginx01/02/03) and 3 backend servers in 3 AZs
 * In `main.yml`:
   * Replace `172.20` addresses with the addresses of your backend servers, those are placeholders
   * Populate the TCP/TLS/UDP ports lists as needed
-  * Populate the security group IDs with the IDs of your security groups in AWS, if using AWS, otherwise set `aws` to `false`
+  * Populate the CIDR you need to allow access from and security group IDs, if using AWS, otherwise set `aws` to `false`
   * Populate `cert_path` to point to the directory holding your cert and key
 * This generates TCP/UDP streams only, not HTTP, so you must have the following in your NGINX config somewhere:
   ```
@@ -64,6 +64,7 @@ Contents:
       172.20.3.13:
         weight: 5
     aws: true
+    cidr: 0.0.0.0\0
     tcp_sg: "sg-xxxxxxxx"
     udp_sg: "sg-xxxxxxxx"
   roles:

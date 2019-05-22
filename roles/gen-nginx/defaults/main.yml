@@ -5,3 +5,4 @@ fail_timeout: 10s
 max_fails: 3
 cert_path:
 key_path:
+cidr: 
